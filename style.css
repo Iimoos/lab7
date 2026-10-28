@@ -1,0 +1,538 @@
+/* ===== 1. Design token (custom properties) ===== */
+:root {
+    --color-bg: #f5f5f5;
+    --color-surface: #ffffff;
+    --color-text: #333333;
+    --color-muted: #666666;
+    --color-primary: #8b0000;
+    --color-heading: #8b0000;
+    --color-header-bg: #8b0000;
+    --color-dark: #222222;
+    --color-accent: #ffd700;
+    --color-border: #eeeeee;
+    --color-placeholder: #dddddd;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.2);
+    --radius: 8px;
+    --dur: 0.3s;
+}
+
+/* Dark mode: зөвхөн token-уудыг дахин зарлана */
+[data-theme="dark"] {
+    --color-bg: #121212;
+    --color-surface: #1e1e1e;
+    --color-text: #e8e8e8;
+    --color-muted: #b5b5b5;
+    --color-heading: #ff8a80;
+    --color-header-bg: #5a0000;
+    --color-dark: #0d0d0d;
+    --color-border: #333333;
+    --color-placeholder: #333333;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    --shadow-hover: 0 10px 20px rgba(0, 0, 0, 0.7);
+}
+
+/* ===== Ерөнхий загвар (MOBILE-FIRST) ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-wrap: break-word;
+    transition: background-color var(--dur), color var(--dur);
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+/* Хүртээмж: keyboard focus */
+:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.skip-link {
+    position: absolute;
+    left: 0.5rem;
+    top: -4rem;
+    background: var(--color-accent);
+    color: #222;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius);
+    z-index: 2000;
+    transition: top var(--dur);
+}
+.skip-link:focus { top: 0.5rem; }
+
+/* ===== Header + SVG ===== */
+header {
+    background-color: var(--color-header-bg);
+    color: white;
+    text-align: center;
+    padding: 1.5rem 1rem;
+}
+
+header h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+header p { font-size: 0.95rem; }
+
+.bowl {
+    width: 80px;
+    height: auto;
+    margin: 0 auto 0.5rem;
+    color: var(--color-accent);
+}
+
+.steam {
+    fill: none;
+    stroke: white;
+    stroke-width: 4;
+    stroke-linecap: round;
+    opacity: 0;
+    animation: steam 2.4s ease-in-out infinite;
+}
+.s2 { animation-delay: 0.4s; }
+.s3 { animation-delay: 0.8s; }
+
+@keyframes steam {
+    0%   { opacity: 0;   transform: translateY(10px); }
+    50%  { opacity: 0.9; }
+    100% { opacity: 0;   transform: translateY(-10px); }
+}
+
+/* ===== Navigation ===== */
+nav {
+    background-color: var(--color-dark);
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+nav .logo {
+    color: var(--color-accent);
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.nav-actions { display: flex; align-items: center; gap: 0.5rem; }
+
+.theme-toggle {
+    background: transparent;
+    color: white;
+    border: 1px solid var(--color-accent);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    min-height: 40px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color var(--dur), color var(--dur);
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+    background: var(--color-accent);
+    color: #222;
+}
+
+.menu-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: var(--color-accent);
+    border-radius: 2px;
+    transition: transform var(--dur), opacity var(--dur);
+}
+
+.menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+nav ul {
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    margin-top: 0.5rem;
+}
+nav ul.open { display: flex; }
+
+nav ul li a {
+    display: block;
+    padding: 0.85rem 0.5rem;
+    color: white;
+    text-decoration: none;
+    font-size: 1.05rem;
+    border-top: 1px solid #444;
+    transition: color var(--dur);
+}
+nav ul li a:hover { color: var(--color-accent); }
+
+/* ===== Үндсэн бүтэц ===== */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 1.25rem auto;
+    padding: 0 1rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-content: start;
+}
+
+/* ===== 2. Hover/focus эффект (transition + transform) ===== */
+.food-card {
+    background-color: var(--color-surface);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform var(--dur), box-shadow var(--dur), background-color var(--dur);
+}
+.food-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: var(--shadow-hover); }
+
+.food-image {
+    width: 100%;
+    height: 160px;
+    background-color: var(--color-placeholder);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-muted);
+    font-weight: bold;
+}
+
+.food-info { padding: 1.25rem; }
+.food-info h3 { margin-bottom: 0.5rem; color: var(--color-heading); }
+.food-info p { font-size: 0.95rem; line-height: 1.5; color: var(--color-muted); }
+
+aside {
+    background-color: var(--color-surface);
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    height: fit-content;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    transition: background-color var(--dur);
+}
+
+aside h2 {
+    color: var(--color-text);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 0.5rem;
+}
+
+aside ul { list-style: none; }
+aside ul li { padding: 0.5rem 0; border-bottom: 1px solid var(--color-border); }
+
+/* ===== Нэмэлт хэсгүүдийн wrapper ===== */
+.wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+}
+
+.section-title {
+    color: var(--color-heading);
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+}
+.section-note { color: var(--color-muted); margin-bottom: 1.25rem; font-size: 0.95rem; }
+
+/* ===== 3. Галерей: Grid + stagger animation ===== */
+.gallery {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.gallery-item {
+    /* --i нь HTML дээрх style="--i:0..5" утга */
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+    animation-delay: calc(var(--i) * 120ms);
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== 4. 3D flip card ===== */
+.flip-card {
+    perspective: 1000px;
+}
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    transform-style: preserve-3d;
+    transition: transform 0.7s;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+
+.flip-card.is-flipped .flip-card-inner { transform: rotateY(180deg); }
+
+@media (hover: hover) and (pointer: fine) {
+    .flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+}
+
+.flip-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.flip-front img { width: 100%; height: 100%; object-fit: cover; }
+
+.flip-front figcaption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 0.6rem 1rem;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-weight: bold;
+}
+
+.flip-back {
+    transform: rotateY(180deg);
+    background: var(--color-surface);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    text-align: center;
+}
+.flip-back h3 { color: var(--color-heading); }
+.flip-back p { color: var(--color-muted); line-height: 1.5; }
+
+.flip-btn {
+    display: block;
+    margin: 0.6rem auto 0;
+    min-height: 44px;
+    padding: 0.5rem 1.4rem;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: transform var(--dur), box-shadow var(--dur), background-color var(--dur);
+}
+.flip-btn:hover,
+.flip-btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+    background: #b30000;
+}
+.flip-btn:active { transform: scale(0.96); }
+
+/* ===== 5. Multimedia ===== */
+.media-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.media-box {
+    background: var(--color-surface);
+    padding: 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+.media-box h3 { color: var(--color-heading); margin-bottom: 0.75rem; }
+
+video,
+.media-box iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: var(--radius);
+    background: #000;
+}
+
+/* ===== Footer ===== */
+footer {
+    background-color: var(--color-dark);
+    color: white;
+    text-align: center;
+    padding: 1.25rem 1rem 4.5rem;
+    margin-top: auto;
+    font-size: 0.9rem;
+}
+
+/* ===== TABLET: 768px+ ===== */
+@media (min-width: 768px) {
+    header { padding: 2rem 1rem; }
+    header h1 { font-size: 2rem; }
+
+    nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+    }
+    .menu-toggle { display: none; }
+    nav ul { display: flex; flex-direction: row; margin-top: 0; gap: 20px; }
+    nav ul li a { border-top: none; padding: 0.4rem 0; }
+
+    .container, .wrapper { padding-left: 1.5rem; padding-right: 1.5rem; }
+
+    main { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .food-image { height: 180px; }
+    aside { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+
+    .gallery { grid-template-columns: repeat(2, 1fr); }
+    .media-grid { grid-template-columns: repeat(2, 1fr); }
+}
+/* Холбоо барих хэсэг дэх линкүүдийн өнгийг өөрчлөх */
+.contact-box a {
+    color: #426d98;
+    text-decoration: none;
+}
+
+
+.contact-box a:hover {
+    color: #65d14b;       /* Хулгана хүргэхэд ямар өнгөтэй болох */
+}
+
+/* ===== DESKTOP: 1024px+ ===== */
+@media (min-width: 1024px) {
+    header h1 { font-size: 2.5rem; }
+
+    .container {
+        margin: 2rem auto;
+        grid-template-columns: 3fr 1fr;
+        gap: 30px;
+    }
+    .food-image { height: 200px; }
+    aside { grid-template-columns: 1fr; gap: 1.5rem; }
+
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1440px) {
+    .container, .wrapper { max-width: 1400px; }
+    main { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* ===== 6. prefers-reduced-motion: хөдөлгөөнийг хязгаарлах ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-delay: 0ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .gallery-item { opacity: 1; }
+    .food-card:hover { transform: none; }
+}
+
+/* ===== Харагдац сонгогч ===== */
+.view-switcher {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    height: 56px;
+    z-index: 1000;
+    background: #111;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+}
+
+.vs-label { display: none; font-size: 0.9rem; margin-right: 6px; }
+
+.view-switcher button {
+    background: #333;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 6px;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    min-height: 40px;
+}
+.view-switcher button:hover { border-color: var(--color-accent); }
+.view-switcher button.active {
+    background: var(--color-accent);
+    color: #222;
+    border-color: var(--color-accent);
+    font-weight: bold;
+}
+
+.preview-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 56px;
+    z-index: 999;
+    background: #555;
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+}
+.preview-overlay[hidden] { display: none; }
+
+.preview-overlay iframe {
+    height: 100%;
+    max-width: 100%;
+    border: 0;
+    background: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+body.in-frame .view-switcher { display: none; }
+body.in-frame footer { padding-bottom: 1.25rem; }
+
+@media (min-width: 768px) {
+    .vs-label { display: inline; }
+    .view-switcher button { padding: 0.5rem 1rem; font-size: 0.95rem; }
+}

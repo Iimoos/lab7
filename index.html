@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Монгол Хоолны Вэб Сайт | Лаб 6</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <a class="skip-link" href="#gallery">Галерей руу шууд очих</a>
+
+    <!-- Header + inline SVG (уур гарах animation) -->
+    <header>
+        <svg class="bowl" viewBox="0 0 120 100" role="img" aria-labelledby="bowlTitle">
+            <title id="bowlTitle">Халуун шөлтэй аяга</title>
+            <path class="steam s1" d="M40 35 C32 25 48 20 40 8" />
+            <path class="steam s2" d="M60 35 C52 25 68 20 60 8" />
+            <path class="steam s3" d="M80 35 C72 25 88 20 80 8" />
+            <path d="M15 45 H105 C105 75 85 92 60 92 C35 92 15 75 15 45 Z" fill="currentColor" />
+        </svg>
+        <h1>Монгол Үндэсний Хоолны Цэс</h1>
+        <p>Уламжлалт амт чанар, соёл уламжлал</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-top">
+            <div class="logo">NomadKitchen</div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-pressed="false">
+                    <span id="themeLabel">Харанхуй</span>
+                </button>
+                <button class="menu-toggle" id="menuToggle"
+                        aria-label="Цэс нээх" aria-expanded="false" aria-controls="navMenu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+        <ul id="navMenu">
+            <li><a href="#">Нүүр хуудас</a></li>
+            <li><a href="#gallery">Галерей</a></li>
+            <li><a href="#media">Видео ба газрын зураг</a></li>
+            <li><a href="#">Холбоо барих</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <main>
+            <div class="food-card">
+                <div class="food-image">Хуушуур</div>
+                <div class="food-info">
+                    <h3>Монгол Хуушуур</h3>
+                    <p>Гар аргаар татсан үхэр, хонины махтай, шаржигнуур амттай уламжлалт хуушуур.</p>
+                </div>
+            </div>
+            <div class="food-card">
+                <div class="food-image">Бууз</div>
+                <div class="food-info">
+                    <h3>Бууз</h3>
+                    <p>Баяр ёслолын ширээний гол чимэг, шүүслэг, амтлаг үндэсний бууз.</p>
+                </div>
+            </div>
+            <div class="food-card">
+                <div class="food-image">Цуйван</div>
+                <div class="food-info">
+                    <h3>Гарын Цуйван</h3>
+                    <p>Гар аргаар элдсэн гурил, шинэхэн мах, ногоотой хослуулан хуурсан цуйван.</p>
+                </div>
+            </div>
+            <div class="food-card">
+                <div class="food-image">Шөл</div>
+                <div class="food-info">
+                    <h3>Банштай Цай</h3>
+                    <p>Сүүтэй цайнд чанасан банш, шар тос, борцоор амталсан алжаал тайлах шөл.</p>
+                </div>
+            </div>
+        </main>
+
+        <aside>
+            <section>
+                <h2>Цагийн хуваарь</h2>
+                <ul>
+                    <li>Даваа - Баасан: 09:00 - 22:00</li>
+                    <li>Бямба - Ням: 10:00 - 23:00</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Онцлох ундаа</h2>
+                <ul>
+                    <li>Үндэсний айраг</li>
+                    <li>Хярам</li>
+                    <li>Борцтой цай</li>
+                </ul>
+            </section>
+        </aside>
+    </div>
+
+    <!-- ===== Лаб 6: Зургийн галерей (3D flip card + stagger animation) ===== -->
+    <section class="wrapper" id="gallery" aria-labelledby="galleryTitle">
+        <h2 id="galleryTitle" class="section-title">Хоолны галерей</h2>
+        <p class="section-note">Зургийг заагчаар дээгүүр нь аваачих эсвэл "Эргүүлэх" товчийг дарж тайлбарыг үзнэ үү.</p>
+
+        <div class="gallery">
+            <figure class="gallery-item" style="--i:0">
+                <div class="flip-card" id="card1">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <img src="img/huushuur.jpg" alt="Хуушуур" loading="lazy" width="800" height="600">
+                            <figcaption>Хуушуур</figcaption>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <h3>Хуушуур</h3>
+                            <p>Хонины махтай, тосонд шарсан шаржигнуур гурилан бүтээгдэхүүн.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="flip-btn" type="button" aria-pressed="false" aria-controls="card1">Эргүүлэх</button>
+            </figure>
+
+            <figure class="gallery-item" style="--i:1">
+                <div class="flip-card" id="card2">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <img src="img/buuz.jpg" alt="Бууз" loading="lazy" width="800" height="600">
+                            <figcaption>Бууз</figcaption>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <h3>Бууз</h3>
+                            <p>Уураар чанасан, дотроо шөлтэй махан бөөрөнхий хоол.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="flip-btn" type="button" aria-pressed="false" aria-controls="card2">Эргүүлэх</button>
+            </figure>
+
+            <figure class="gallery-item" style="--i:2">
+                <div class="flip-card" id="card3">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <img src="img/tsuiwan.jpg" alt="Цуйван" loading="lazy" width="800" height="600">
+                            <figcaption>Цуйван</figcaption>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <h3>Цуйван</h3>
+                            <p>Гар аргаар элдсэн гурил, мах, ногоотой хуурсан хоол.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="flip-btn" type="button" aria-pressed="false" aria-controls="card3">Эргүүлэх</button>
+            </figure>
+
+            <figure class="gallery-item" style="--i:3">
+                <div class="flip-card" id="card4">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <img src="img/banshtai_tsai.jpg" alt="Банштай цай" loading="lazy" width="800" height="600">
+                            <figcaption>Банштай цай</figcaption>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <h3>Банштай цай</h3>
+                            <p>Сүүтэй цайнд чанасан банш, шар тос хийж идэх өглөөний хоол.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="flip-btn" type="button" aria-pressed="false" aria-controls="card4">Эргүүлэх</button>
+            </figure>
+
+            <figure class="gallery-item" style="--i:4">
+                <div class="flip-card" id="card5">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <img src="img/horhog.jpg" alt="Хорхог" loading="lazy" width="800" height="600">
+                            <figcaption>Хорхог</figcaption>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <h3>Хорхог</h3>
+                            <p>Халуун чулуугаар чанасан хонины мах, ихэвчлэн хүндэтгэлийн хоол.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="flip-btn" type="button" aria-pressed="false" aria-controls="card5">Эргүүлэх</button>
+            </figure>
+
+            <figure class="gallery-item" style="--i:5">
+                <div class="flip-card" id="card6">
+                    <div class="flip-card-inner">
+                        <div class="flip-face flip-front">
+                            <img src="img/bantan.jpg" alt="Бантан" loading="lazy" width="800" height="600">
+                            <figcaption>Бантан</figcaption>
+                        </div>
+                        <div class="flip-face flip-back">
+                            <h3>Бантан</h3>
+                            <p>Гурилыг жижиглэн нунтаглаж, махтай шөлөнд чанасан зутан шөл.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="flip-btn" type="button" aria-pressed="false" aria-controls="card6">Эргүүлэх</button>
+            </figure>
+        </div>
+    </section>
+
+    <!-- ===== Лаб 6: Multimedia (video + track + iframe) ===== -->
+    <section class="wrapper" id="media" aria-labelledby="mediaTitle">
+        <h2 id="mediaTitle" class="section-title">Видео ба байршил</h2>
+
+        <div class="media-grid">
+            <div class="media-box">
+                <h3>Танилцуулга видео</h3>
+                <video controls preload="metadata" poster="img/huushuur.jpg" width="100%">
+                     <source src="video/taniltsuulga.mp4" type="video/mp4">
+                     <source src="video/taniltsuulga_new.webm" type="video/webm">                   
+                     <track kind="captions" src="video/WEBVTT.vtt" srclang="mn" label="Монгол" default>
+            Таны хөтөч видео тоглуулахыг дэмжихгүй байна.
+                </video>
+            </div>
+
+            <div class="media-box">
+    <h3>Байршил (Улаанбаатар)</h3>
+    <iframe
+        title="Улаанбаатар хотын газрын зураг"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d85834.78768078864!2d106.83731872134502!3d47.91866752044815!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d969251d0da8703%3A0x102e4cfcd125867!2z0KPQtNCw0L3QvtC90LjRgdGCINGC0LXQstC40Y8!5e0!3m2!1smn!2smn!4v1711000000000!5m2!1smn!2smn"
+        width="100%"
+        height="450"
+        style="border:0;"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
+        </div>
+        <div class="contact-box">
+    <h3>Холбоо барих</h3>
+    <p>
+        <strong>Утасны дугаар:</strong> 
+        <a href="tel:+97699999999">+976 99999999</a>
+    </p>
+    <p>
+        <strong>Имэйл хаяг:</strong> 
+        <a href="mailto:mongolhool88@gmail.com">mongolhool88@gmail.com</a>
+    </p>
+    <p>
+        <strong>Хаяг байршил:</strong> Улаанбаатар хот
+    </p>
+</div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Монгол Хоолны Вэб Сайт. Бүх эрх хуулиар хамгаалагдсан.</p>
+    </footer>
+
+    <!-- Харагдац сонгогч -->
+    <div class="view-switcher" id="viewSwitcher">
+        <span class="vs-label">Харагдац:</span>
+        <button data-view="auto" class="active">Автомат</button>
+        <button data-view="375">Гар утас</button>
+        <button data-view="768">Таблет</button>
+    </div>
+    <div class="preview-overlay" id="previewOverlay" hidden>
+        <iframe id="previewFrame" title="Харагдац урьдчилан харах"></iframe>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

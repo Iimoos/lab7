@@ -1,0 +1,23 @@
+// Flexbox төвлөрүүлэх mixin
+@mixin flex-center($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// Media query (respond) mixin
+@mixin respond($breakpoint) {
+  @if $breakpoint == sm {
+    @media (min-width: 576px) { @content; }
+  }
+  @if $breakpoint == md {
+    @media (min-width: 768px) { @content; }
+  }
+  @if $breakpoint == lg {
+    @media (min-width: 1024px) { @content; }
+  }
+  @if $breakpoint == xl {
+    @media (min-width: 1440px) { @content; }
+  }
+}

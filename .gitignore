@@ -1,0 +1,9 @@
+# Node modules
+node_modules/
+
+# Sass map files
+css/*.css.map
+
+# OS files
+.DS_Store
+Thumbs.db
